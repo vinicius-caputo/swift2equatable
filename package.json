@@ -10,7 +10,7 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {},
-  "bin": "dist/src/index.js",
+  "bin": "dist/src/bin.js",
   "pkg": {
     "scripts": [
       "dist/src/**/*.js"

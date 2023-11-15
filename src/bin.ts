@@ -3,7 +3,7 @@ import { argv } from 'process';
 
 function resolveArgs() {
     if (argv.length < 3) {
-        console.log('Basic usage: swift2equatable <path-to-xib-file>');
+        console.log('Basic usage: swift2equatable <path-to-swift-file>');
         console.log('Help: swift2equatable -h');
         process.exit(1);
     }
@@ -12,11 +12,11 @@ function resolveArgs() {
     let outputPath = '';
     argv.forEach((val, index) => {
         if (val == '-h' || val == '--help') {
-            console.log('Basic usage: swift2equatable <path-to-xib-file>');
+            console.log('Basic usage: swift2equatable <path-to-swift-file>');
             console.log('Options:');
-            console.log(' -p, --path <path-to-xib-file>  Path to xib file');
+            console.log(' -p, --path <path-to-swift-file>  Path to swift file');
             console.log(' -o, --outputPath <path-to-output-file>  Path to output file');
-            console.log(' -s, --string <xib-string>  xib string');
+            console.log(' -s, --string <swift-string> swift string');
             console.log(' -h, --help  Display this help message');
             process.exit(0);
         }
