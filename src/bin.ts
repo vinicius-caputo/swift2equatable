@@ -20,8 +20,8 @@ function resolveArgs() {
             console.log(' -o, --outputPath <path-to-output-file>  Path to output file');
             console.log(' -s, --string <swift-string> swift string');
             console.log(' -h, --help  Display this help message');
-            console.log(' -r, --useRetroactive  Use retroactive protocol conformance');
-            console.log(' -p, --usePublic  Use public prefix in generated code');
+            console.log(' -ur, --useRetroactive  Use retroactive protocol conformance');
+            console.log(' -up, --usePublic  Use public prefix in generated code');
             process.exit(0);
         }
         else if (val == '-p' || val == '--path') {
@@ -33,10 +33,10 @@ function resolveArgs() {
         else if (val == '-o' || val == '--outputPath') {
             outputPath = argv[index + 1];
         }
-        else if (val == '-r' || val == '--useRetroactive') {
+        else if (val == '-ur' || val == '--useRetroactive') {
             useRetroactive = true;
         }
-        else if (val == '-p' || val == '--usePublic') {
+        else if (val == '-up' || val == '--usePublic') {
             usePublic = true;
         }
     });
