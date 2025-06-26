@@ -8,7 +8,11 @@ struct Person: String {
         var age: Int
    
         struct Paw {
-            let Paw: String
+            let Paw: [String]
+        }
+        
+        struct head {
+            let eyes: Array<String>
         }
     }
 

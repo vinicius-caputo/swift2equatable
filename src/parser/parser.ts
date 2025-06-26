@@ -1,5 +1,6 @@
 import { lexemes } from './lexemes';
 import { SyntaxTree, Enum, EnumCase, EnumCaseParameter, Property, Struct } from '../types';
+import { addArraySuffixIfNeeded } from '../util';
 
 export class Parser {
     private lines: string[];
@@ -101,7 +102,7 @@ export class Parser {
             
             return {
                 name: parameterSplit.length === 1 ? undefined : parameterSplit[0],
-                type: parameterSplit.length === 1 ? parameterSplit[0] + index : parameterSplit[1]
+                type: parameterSplit.length === 1 ? addArraySuffixIfNeeded(parameterSplit[0]) + index : parameterSplit[1]
             };
         });
     }

@@ -1,15 +1,23 @@
 import { swift2equatable } from "../src";
 
-// Then register the languages you need
-const button = document.getElementById("generate-button") as HTMLButtonElement;
+const input = document.getElementById("input-Text") as HTMLTextAreaElement;
+const output = document.getElementById("output-Text") as HTMLTextAreaElement;
+const includeComments = document.getElementById("includeComments") as HTMLInputElement;
+const useCustomComparison = document.getElementById("useCustomComparison") as HTMLInputElement;
 
-button.addEventListener("click", generate);
+function updateOutput() {
+  const inputText = input.value;
 
-function generate() {
-    console.log("Generate");
-    const input = document.getElementById("input-Text") as HTMLTextAreaElement;
-    let string = input.value;
-    const output = document.getElementById("output-Text") as HTMLTextAreaElement;
-    let result = swift2equatable(string);
-    output.value = result;
+  const result = swift2equatable(
+    inputText,
+    includeComments.checked,
+    useCustomComparison.checked
+  );
+
+  output.value = result;
 }
+
+input.addEventListener("input", updateOutput);
+includeComments.addEventListener("change", updateOutput);
+useCustomComparison.addEventListener("change", updateOutput);
+

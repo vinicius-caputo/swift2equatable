@@ -2,7 +2,11 @@ import { Struct, Enum, EnumCase, EnumCaseParameter } from "./types";
 import { captalizeFirstLetter } from "./util";
 
 export class swift2equatableConverter {
-    public static convert(structs: Struct[], enums: Enum[]): string {
+    private static equatableDeclartion: string = "Equatable";
+    private static visibilityDeclaration: string = "";
+
+    public static convert(structs: Struct[], enums: Enum[], usePublic: boolean = false, useRetroactive: boolean = false): string {
+        this.defineEquatableAndVisibility(usePublic, useRetroactive);
         let equatables: string[] = [];
         for (const struct of structs) {
             if (struct.property.length == 0) continue;
@@ -15,10 +19,15 @@ export class swift2equatableConverter {
         return equatables.join("\n\n");
     }
 
+    private static defineEquatableAndVisibility(usePublic: Boolean, useRetroactive: boolean) {
+        if (usePublic) this.visibilityDeclaration = "public ";
+        if (useRetroactive) this.equatableDeclartion = "@retroactive Equatable";
+    }
+
     private static convertStruct(struct: Struct): string {
         let equatable: string[] = [];
-        equatable.push(`extension ${struct.fullName}: Equatable {`);
-        equatable.push(`\tstatic func == (lhs: ${struct.fullName}, rhs: ${struct.fullName}) -> Bool {`);
+        equatable.push(`extension ${struct.fullName}: ${this.equatableDeclartion} {`);
+        equatable.push(`\t${this.visibilityDeclaration}static func == (lhs: ${struct.fullName}, rhs: ${struct.fullName}) -> Bool {`);
         let properties: string[] = [];
         for (const property of struct.property) {
             properties.push(`lhs.${property.name} == rhs.${property.name}`);
@@ -32,8 +41,8 @@ export class swift2equatableConverter {
 
     private static convertEnum(enun: Enum): string {
         let equatable: string[] = [];
-        equatable.push(`extension ${enun.name}: Equatable {`);
-        equatable.push(`\tstatic func == (lhs: ${enun.name}, rhs: ${enun.name}) -> Bool {`);
+        equatable.push(`extension ${enun.name}: ${this.equatableDeclartion} {`);
+        equatable.push(`\t${this.visibilityDeclaration}static func == (lhs: ${enun.name}, rhs: ${enun.name}) -> Bool {`);
         equatable.push(`\t\tswitch (lhs, rhs) {`);
         let cases: string[] = [];
         for (const caze of enun.cases) {
