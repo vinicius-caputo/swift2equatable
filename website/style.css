@@ -47,11 +47,11 @@ body {
   
   #description {
     max-width: 900px;
-    margin: 30px auto 10px;
+    margin: 10px auto 10px;
     text-align: center;
     font-size: 18px;
     color: #333;
-    padding: 0 15px;
+    padding: 0 10px;
   }
   
   #box {
