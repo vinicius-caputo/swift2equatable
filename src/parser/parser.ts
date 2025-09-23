@@ -99,12 +99,17 @@ export class Parser {
         return parametersDeclaration.split(",").map((parameter, index) => {
             const trimmedParameter = parameter.trim();
             const parameterSplit = trimmedParameter.split(":");
-            
+            const indexID = index === 0 ? "" : `${index}`;
             return {
                 name: parameterSplit.length === 1 ? undefined : parameterSplit[0],
-                type: parameterSplit.length === 1 ? addArraySuffixIfNeeded(parameterSplit[0]) + index : parameterSplit[1]
+                type: parameterSplit.length === 1 ? this.formatParameterType(parameterSplit[0]) + indexID : parameterSplit[1]
             };
         });
+    }
+
+    private formatParameterType(type: string): string {
+        const removedSpecialCarcaterInType = type.replaceAll(".", "");
+        return addArraySuffixIfNeeded(removedSpecialCarcaterInType);
     }
 
     get structList(): Struct[] {

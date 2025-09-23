@@ -15,7 +15,11 @@ enum Barcode2 {
     case qrCode2(qrCode: String)
 }
 
-enum Barcode3{
+enum Barcode3 {
     case upc2(Array<Int>)
     case qrCode2([String])
+}
+
+enum otherType {
+    case another(myType.Type, Int)
 }
